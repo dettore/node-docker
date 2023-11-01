@@ -1,0 +1,35 @@
+# shared configuration options between dev and prod
+version: "3"
+services:
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "3000:80" 
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - node-app
+  node-app:
+    build: .
+#   no longer need to publish ports for node add
+#   since nginx is doing load balancing
+#   ports:
+#     - "3000:3000"
+    environment:
+      - PORT=3000
+    depends_on:
+      - mongo
+      
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=don
+      - MONGO_INITDB_ROOT_PASSWORD=mypassword
+    volumes:
+      - mongo-db:/data/db
+
+  redis:
+    image: redis
+
+volumes:
+  mongo-db:
