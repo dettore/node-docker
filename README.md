@@ -455,3 +455,9 @@ don@boost:~$ docker-compose -v
 docker-compose version 1.29.2, build unknown
 ```
 
+## Moving to Production
+
+If only the app is going to change, and if the containers are already up, you can specify which service to build. Adding `--no-deps` won't rebuild the dependent containers (since they probably didn't change).
+
+`sudo docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build --no-deps node-app`
+
