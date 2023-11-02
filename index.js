@@ -46,23 +46,6 @@ const connectWithRetry = () => {
 
 connectWithRetry();
 
-/*
-app.use(session({
-    store: RedisStore,
-    client: redisClient,
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        secure: false,
-        resave: false,
-        saveUninitialized: false,
-        httpOnly: true,
-        maxAge: 30000
-    }
-}))
-*/  
-
 app.enable("trust proxy");
 app.use(cors({}));
 app.use(session({
@@ -81,7 +64,7 @@ app.use(session({
 app.use(express.json());
 
 app.get("/api/v1", (req, res) => {
-    res.send("<h2>Hi There!!!</h2>");
+    res.send("<h2>Hi There!!!!</h2>");
     console.log("yeah it ran");
 });
 
