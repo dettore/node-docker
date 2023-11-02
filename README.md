@@ -461,3 +461,7 @@ If only the app is going to change, and if the containers are already up, you ca
 
 `sudo docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build --no-deps node-app`
 
+You can also force a recreate with no deps as well
+
+`sudo docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --force-recreate --no-deps node-app`
+
