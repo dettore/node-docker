@@ -11,6 +11,8 @@ services:
       - node-app
   node-app:
     build: .
+#   pull the image from docker hub
+    image: dettore/node-app
 #   no longer need to publish ports for node add
 #   since nginx is doing load balancing
 #   ports:

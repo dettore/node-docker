@@ -465,3 +465,30 @@ You can also force a recreate with no deps as well
 
 `sudo docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --force-recreate --no-deps node-app`
 
+### Pushing to Docker Hub
+
+Create a new repository on Docker Hub (on website)
+(May need to log in before next step: `node-docker-node-app`)
+Rename the image that you want to push
+
+```
+docker image ls
+REPOSITORY                       TAG             IMAGE ID       CREATED         SIZE
+node-docker-node-app             latest          4f459a1fe853   2 days ago      918MB
+```
+`docker image tag node-docker-node-app dettore/node-app`
+
+```
+docker image ls
+REPOSITORY                       TAG             IMAGE ID       CREATED         SIZE
+dettore/node-app                 latest          4f459a1fe853   2 days ago      918MB
+node-docker-node-app             latest          4f459a1fe853   2 days ago      918MB
+```
+
+Push image to docker hub 
+
+`docker push dettore/node-app`
+
+Tell Docker Compose to pull the image from Docker Hub
+
+`image: dettore/node-app`
