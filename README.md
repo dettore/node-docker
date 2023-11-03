@@ -517,3 +517,54 @@ The full documentation is available at https://containrrr.dev/watchtower.
 
 To remove and delete the contaomer:  `sudo docker rm watchtower -f`
 
+## Container Orchastrator
+
+Docker Swarm is a built-in container orchastrator
+
+"rolling updates" (minimal downtime for app)
+
+(BTW, Kubernetes is a container orchastrator)
+
+Docker Swarm contains two type of nodes:  Manager Node and Worker Node
+
+Swarm is installed by default with Docker, but it is inactive:
+
+```
+sudo docker info
+...
+Swarm: inactive
+...
+```
+`sudo docker swarm init`
+
+It looks like to default is to set the current node as manager, if an IP addr was not specified.   IP add can be specified with:
+
+`sudo docker swarm init --advertise-addr 192.168.40.94`
+
+```
+don@boost:~/app$ sudo docker swarm init --advertise-addr 192.168.40.94
+Swarm initialized: current node (iy184oulngfz3u0gjsxnhf5m3) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-4ab34pd6izg81ejxnncx1xjv41sodv8bwprfzhl3mwg5k7oxfe-6ml3alrrz7hseldnafld4axrk 192.168.40.94:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+```
+
+If a node is added as a manager, it is also a worker by default.
+
+Use `docker service` to manage Swarm services
+
+Docker Swarm options can be set in the Docker Compose file under a `deploy:` section.  These are only set in the Prod version since Swarm is not needed in Dev.
+
+```
+  node-app:
+    deploy:
+      replicas: 8
+      restart_policy:
+        condition: any
+      update_config:
+        parallelism: 2
+        delay: 15s
+```
