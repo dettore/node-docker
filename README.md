@@ -568,3 +568,6 @@ Docker Swarm options can be set in the Docker Compose file under a `deploy:` sec
         parallelism: 2
         delay: 15s
 ```
+Use `docker stack` on prod server to deploy
+
+`sudo docker stack deploy -c docker-compose.yml -c docker-compose.prod.yml myapp`
