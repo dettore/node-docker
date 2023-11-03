@@ -492,3 +492,28 @@ Push image to docker hub
 Tell Docker Compose to pull the image from Docker Hub
 
 `image: dettore/node-app`
+
+Make code changes and then build locally (for Prod)
+
+`docker compose -f docker-compose.yml -f docker-compose.prod.yml build node-app`
+
+`docker compose -f docker-compose.yml -f docker-compose.prod.yml push node-app`
+
+`sudo docker compose -f docker-compose.yml -f docker-compose.prod.yml pull`
+
+`sudo docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --no-deps node-app`
+
+## Automating Docker Container Base Image Updates - Watchtower
+
+Periodically checks the Docker Hub repository for updates to images.  
+
+This may not be something that you want to do in Production, but it has been provided as an example for automating part of the production deployment process.
+
+https://github.com/containrrr/watchtower
+
+The full documentation is available at https://containrrr.dev/watchtower.
+
+`sudo docker run -d --name watchtower -e WATCHTOWER_TRACE=true -e WATCHTOWER_DEBUG=true -e WATCHTOWER_POLL_INTERVAL=50 -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower app-node-app-1`
+
+To remove and delete the contaomer:  `sudo docker rm watchtower -f`
+
