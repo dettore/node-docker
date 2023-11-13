@@ -312,7 +312,7 @@ Bring the app and DB up
 Video used `mongo` to get into Mongo, but the mondo shell was removed starting in MongoDB 6.0.  The replacement is `mongosh`.
 
 `docker exec -it node-docker-mongo-1 bash`
-`mongosh -p "don" -u "mypassword"`
+`mongosh -u "don" -p "mypassword"`
 
 Working with MongoDB
 
